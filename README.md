@@ -5,7 +5,7 @@ Experiment to programmatically manage Salesforce data.
 ## Usage
 
 ```
-$ poetry run python -m sf_demo
+$ poetry run python -m streamlit run src/sf_demo/__main__.py
 ```
 
 ## Developing

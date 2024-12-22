@@ -1,4 +1,6 @@
 from dataclasses import dataclass
+
+import streamlit as st
 from environs import Env
 from simple_salesforce import Salesforce
 
@@ -37,6 +39,12 @@ class SalesforceContacts:
 
         return contacts
 
+    def add(self, given_name: str, family_name: str, email: str) -> None:
+        self._client.Contact.create({
+            'FirstName': given_name,
+            'LastName': family_name,
+            'Email': email,
+        })
 
 class SalesforceClient:
     def __init__(self, config: Config):
@@ -66,7 +74,22 @@ def load_config() -> Config:
 def main():
     config = load_config()
     sf = SalesforceClient(config)
-    print(sf.contacts.list())
+
+    if st.button("List contacts", type="primary"):
+        st.write("Salesforce Contacts")
+        st.table(sf.contacts.list())
+
+    with st.form("add_contact"):
+        st.write("Add new contact")
+        given_name = st.text_input('First name:', 'Constance')
+        family_name = st.text_input('First name:', 'Watson')
+        email = st.text_input('Email:', 'connie.watson@fastmail.fm')
+        add_contact_submit = st.form_submit_button('Submit')
+
+    if add_contact_submit:
+        sf.contacts.add(given_name, family_name, email)
+        st.success("Contact added successfully")
+
 
 if __name__ == '__main__':
     main()
