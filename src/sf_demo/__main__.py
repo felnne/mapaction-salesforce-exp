@@ -31,20 +31,25 @@ class SalesforceContacts:
 
         results = self._client.query_all("SELECT Id, Name, Email FROM Contact")
         for record in results["records"]:
-            contacts.append(Contact(
-                sf_id=record["Id"],
-                name=record["Name"],
-                email=record["Email"],
-            ))
+            contacts.append(
+                Contact(
+                    sf_id=record["Id"],
+                    name=record["Name"],
+                    email=record["Email"],
+                )
+            )
 
         return contacts
 
     def add(self, given_name: str, family_name: str, email: str) -> None:
-        self._client.Contact.create({
-            'FirstName': given_name,
-            'LastName': family_name,
-            'Email': email,
-        })
+        self._client.Contact.create(
+            {
+                "FirstName": given_name,
+                "LastName": family_name,
+                "Email": email,
+            }
+        )
+
 
 class SalesforceClient:
     def __init__(self, config: Config):
@@ -81,15 +86,15 @@ def main():
 
     with st.form("add_contact"):
         st.write("Add new contact")
-        given_name = st.text_input('First name:', 'Constance')
-        family_name = st.text_input('First name:', 'Watson')
-        email = st.text_input('Email:', 'connie.watson@fastmail.fm')
-        add_contact_submit = st.form_submit_button('Submit')
+        given_name = st.text_input("First name:", "Constance")
+        family_name = st.text_input("First name:", "Watson")
+        email = st.text_input("Email:", "connie.watson@fastmail.fm")
+        add_contact_submit = st.form_submit_button("Submit")
 
     if add_contact_submit:
         sf.contacts.add(given_name, family_name, email)
         st.success("Contact added successfully")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
