@@ -17,6 +17,7 @@ class Contact:
     sf_id: str
     name: str
     email: str
+    mobile: str | None = None
 
     def __repr__(self):
         return f"Contact(sf_id={self.sf_id}, email={self.email})"
@@ -29,26 +30,54 @@ class SalesforceContacts:
     def list(self) -> list[Contact]:
         contacts = []
 
-        results = self._client.query_all("SELECT Id, Name, Email FROM Contact")
+        results = self._client.query_all("SELECT Id, Name, Email, MobilePhone FROM Contact")
         for record in results["records"]:
             contacts.append(
                 Contact(
                     sf_id=record["Id"],
                     name=record["Name"],
                     email=record["Email"],
+                    mobile=record.get("MobilePhone"),
                 )
             )
 
         return contacts
 
-    def add(self, given_name: str, family_name: str, email: str) -> None:
-        self._client.Contact.create(
-            {
-                "FirstName": given_name,
-                "LastName": family_name,
-                "Email": email,
-            }
+    def find_by_email(self, email: str) -> Contact | None:
+        result = self._client.query(f"SELECT Id, Name, Email, MobilePhone FROM Contact WHERE Email = '{email}'")
+
+        if result["totalSize"] == 0:
+            return None
+
+        if result["totalSize"] > 1:
+            msg = f"Multiple contacts found with email '{email}'."
+            raise ValueError(msg)
+
+        record = result["records"][0]
+        return Contact(
+            sf_id=record["Id"],
+            name=record["Name"],
+            email=record["Email"],
+            mobile=record.get("MobilePhone"),
         )
+
+    def add(self, given_name: str, family_name: str, email: str, mobile: str | None = None) -> None:
+        payload = {
+            "FirstName": given_name,
+            "LastName": family_name,
+            "Email": email,
+        }
+        if mobile:
+            payload["MobilePhone"] = mobile
+
+        self._client.Contact.create(payload)
+
+    def update(self, contact: Contact, mobile: str | None = None) -> None:
+        payload = {}
+        if mobile:
+            payload["MobilePhone"] = mobile
+
+        self._client.Contact.update(contact.sf_id, payload)
 
 
 class SalesforceClient:
@@ -80,20 +109,23 @@ def main():
     config = load_config()
     sf = SalesforceClient(config)
 
-    if st.button("List contacts", type="primary"):
-        st.write("Salesforce Contacts")
-        st.table(sf.contacts.list())
+    identity = st.text_input("Identity:", "ffennell@mapaction.org")
+    st.write(f"Identity: {identity}")
 
-    with st.form("add_contact"):
-        st.write("Add new contact")
-        given_name = st.text_input("First name:", "Constance")
-        family_name = st.text_input("First name:", "Watson")
-        email = st.text_input("Email:", "connie.watson@fastmail.fm")
-        add_contact_submit = st.form_submit_button("Submit")
+    contact = sf.contacts.find_by_email(identity)
+    if contact is None:
+        st.write("Contact not found.")
+    else:
+        with st.form("contact"):
+            st.write("Update your contact details")
+            st.text_input("Name:", contact.name, disabled=True)
+            st.text_input("Email:", contact.email, disabled=True)
+            mobile = st.text_input("Mobile:", contact.mobile)
+            contact_submit = st.form_submit_button("Update details")
 
-    if add_contact_submit:
-        sf.contacts.add(given_name, family_name, email)
-        st.success("Contact added successfully")
+        if contact_submit and mobile is not None and mobile != contact.mobile:
+            sf.contacts.update(contact, mobile)
+            st.success("Details updated successfully.")
 
 
 if __name__ == "__main__":
