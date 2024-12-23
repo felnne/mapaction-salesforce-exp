@@ -1,25 +1,28 @@
-[tool.poetry]
-name = "sf-demo"
+[project]
+name = "sf-exp"
 version = "0.1.0"
 description = "Experiment to programmatically manage Salesforce data."
-authors = ["Felix Fennell <felnne@bas.ac.uk>"]
+authors = [{name="Felix Fennell", email="felnne@bas.ac.uk"}]
 readme = "README.md"
-packages = [{include = "sf_demo", from = "src"}]
+classifiers = [
+    "Private :: Do Not Upload",
+    "License :: OSI Approved :: MIT License",
+]
+requires-python = ">=3.13"
+dependencies = [
+    "environs>=11.2.1",
+    "pyjwt>=2.10.1",
+    "simple-salesforce>=1.12.6",
+    "streamlit>=1.41.1",
+    "streamlit-oauth>=0.1.14",
+]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-simple-salesforce = "^1.12.6"
-environs = "^11.2.1"
-streamlit = "^1.41.1"
-
-[tool.poetry.group.dev.dependencies]
-ruff = "^0.8.4"
+[dependency-groups]
+dev = [
+    "ruff>=0.8.4",
+]
 
 [tool.ruff]
 src = ["src"]
 line-length = 120
-target-version = "py312"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+target-version = "py313"

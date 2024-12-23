@@ -5,7 +5,7 @@ Experiment to programmatically manage Salesforce data.
 ## Usage
 
 ```
-$ poetry run python -m streamlit run src/sf_demo/__main__.py
+$ uv run -- streamlit run main.py
 ```
 
 ## Developing
@@ -14,17 +14,16 @@ $ poetry run python -m streamlit run src/sf_demo/__main__.py
 
 Requirements:
 
-* [pyenv](https://github.com/pyenv/pyenv)
-* [Poetry](https://python-poetry.org/docs/#installation) (1.8+)
-* Git (`brew install git`)
-* Pre-commit (`pipx install pre-commit`)
+* [UV](https://docs.astral.sh/uv) (`brew install uv`)
+* [Git](https://git-scm.com) (`brew install git`)
+* [Pre-commit](https://pre-commit.com) (`uv tool install pre-commit`)
 
 ```
 $ git clone ...
-$ cd sf-demo/
-$ pyenv install 3.12
-$ poetry install
+$ cd sf-exp/
 $ pre-commit install
 ```
+
+**Note:** UV will automatically create a Python virtual environment for the project at runtime.
 
 Copy and update `.env.example` as `.env`.
