@@ -1,8 +1,8 @@
 [project]
 name = "sf-exp"
 version = "0.1.0"
-description = "Experiment to programmatically manage Salesforce data."
-authors = [{name="Felix Fennell", email="felnne@bas.ac.uk"}]
+description = "Experiment to programmatically access and manage Salesforce data."
+authors = [{name="Felix Fennell", email="ffennell@mapaction.org"}]
 readme = "README.md"
 classifiers = [
     "Private :: Do Not Upload",

@@ -177,21 +177,19 @@ def main():
     sf = SalesforceClient(config)
     st_oauth = StreamlitOauthClient(config)
 
+    st.title("MapAction Salesforce Automotion Experiments")
     st.write(
         """
-        # MapAction Salesforce external access experiment
-
         Experiment to explore the effort needed to access and update information stored in Salesforce from an external
-        app. Uses volunteers viewing and updating parts of their personal information as an example use-case.
-
-        **Note:** This experiment uses an isolated Salesforce instance and cannot access real MapAction data.
-
-        To begin, sign in with your MapAction Google account to load a subset of your details. Only your mobile number
-        can be updated.
+        app. Volunteers viewing and updating parts of their personal information is used as an example use-case.
         """
     )
+    st.warning("This experiment uses an development Salesforce instance and cannot access real MapAction data.")
+    st.info("In this experiment only a few profile fields are shown, and only your mobile number can be updated.")
 
     if "auth_id_token" not in st.session_state:
+        st.write("To begin, sign in with your MapAction Google account to load your details.")
+
         result = st_oauth.authorize_button()
         if result and "token" in result:
             st_oauth.process_token(result)
@@ -201,8 +199,9 @@ def main():
             st.session_state.auth_claim_family_name = st_oauth.id_claims.family_name
             st.rerun()
     else:
+        st.balloons()
         name = f"{st.session_state.auth_claim_given_name} {st.session_state.auth_claim_family_name}"
-        st.write(f"Hello {name} ({st.session_state.auth_claim_email})")
+        st.info(f"Signed in as: {name} ({st.session_state.auth_claim_email})")
 
         contact = sf.contacts.find_by_email(st.session_state.auth_claim_email)
         if contact is None:
