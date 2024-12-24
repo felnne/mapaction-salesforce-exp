@@ -1,6 +1,6 @@
 # MapAction Salesforce Automotion Experiments
 
-Experiment to programmatically manage Salesforce data.
+Experiment to programmatically access and manage Salesforce data.
 
 ## Usage
 
