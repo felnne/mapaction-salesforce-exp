@@ -2,7 +2,6 @@ from dataclasses import dataclass
 
 import jwt
 import streamlit as st
-from environs import Env
 from simple_salesforce import Salesforce
 from streamlit_oauth import OAuth2Component
 
@@ -11,8 +10,8 @@ from streamlit_oauth import OAuth2Component
 class Config:
     oauth_client_id: str
     oauth_client_secret: str
-    oauth_authorise_url: str
-    oauth_token_url: str
+    oauth_authorise_endpoint: str
+    oauth_token_endpoint: str
     oauth_redirect_uri: str
     oauth_scope: str
     sf_domain: str
@@ -109,8 +108,8 @@ class StreamlitOauthClient:
         self._client = OAuth2Component(
             client_id=config.oauth_client_id,
             client_secret=config.oauth_client_secret,
-            authorize_endpoint=config.oauth_authorise_url,
-            token_endpoint=config.oauth_token_url,
+            authorize_endpoint=config.oauth_authorise_endpoint,
+            token_endpoint=config.oauth_token_endpoint,
         )
 
     def authorize_button(self) -> dict:
@@ -160,21 +159,17 @@ class SalesforceClient:
 
 
 def load_config() -> Config:
-    env = Env()
-    env.read_env()
-
-    with env.prefixed("APP_"):
-        return Config(
-            oauth_client_id=env.str("OAUTH_CLIENT_ID"),
-            oauth_client_secret=env.str("OAUTH_CLIENT_SECRET"),
-            oauth_authorise_url=env.str("OAUTH_AUTHORISE_URL"),
-            oauth_token_url=env.str("OAUTH_TOKEN_URL"),
-            oauth_redirect_uri=env.str("OAUTH_REDIRECT_URI"),
-            oauth_scope=env.str("OAUTH_SCOPE"),
-            sf_domain=env.str("SF_DOMAIN"),
-            sf_client_id=env.str("SF_CLIENT_ID"),
-            sf_client_secret=env.str("SF_CLIENT_SECRET"),
-        )
+    return Config(
+        oauth_client_id=st.secrets.oauth.client_id,
+        oauth_client_secret=st.secrets.oauth.client_secret,
+        oauth_authorise_endpoint=st.secrets.oauth.authorise_endpoint,
+        oauth_token_endpoint=st.secrets.oauth.token_endpoint,
+        oauth_redirect_uri=st.secrets.oauth.redirect_uri,
+        oauth_scope=st.secrets.oauth.scopes,
+        sf_domain=st.secrets.salesforce.domain,
+        sf_client_id=st.secrets.salesforce.client_id,
+        sf_client_secret=st.secrets.salesforce.client_secret,
+    )
 
 
 def main():

@@ -35,8 +35,10 @@ Requirements:
 $ git clone ...
 $ cd sf-exp/
 $ pre-commit install
+$ cp .streamlit/secrets.toml.example .streamlit/secrets.toml
 ```
+
+Update any 'xxx' values in `.streamlit/secrets.toml`.
 
 **Note:** UV will automatically create a Python virtual environment for the project at runtime.
 
-Copy and update `.env.example` as `.env`.
