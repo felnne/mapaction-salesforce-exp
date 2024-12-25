@@ -4,9 +4,6 @@ Experiment to programmatically access and manage Salesforce data.
 
 ## Usage
 
-```
-$ uv run -- streamlit run main.py
-```
 
 ## Setup
 
@@ -43,6 +40,26 @@ $ cp .streamlit/secrets.toml.example .streamlit/secrets.toml
 Update any 'xxx' values in `.streamlit/secrets.toml`.
 
 **Note:** UV will automatically create a Python virtual environment for the project at runtime.
+
+Run app:
+
+```
+$ uv run -- streamlit run main.py
+```
+
+## Releasing
+
+To create a release:
+
+- close release in `CHANGELOG.md`
+- increment version in `pyproject.toml`
+- create release commit
+- tag release
+- push `main` branch and tag
+
+## Deployment
+
+The Streamlit GitHub integration will automatically deploy pushed commits to the Streamlit Community Cloud.
 
 # License
 
