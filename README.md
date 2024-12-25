@@ -16,8 +16,22 @@ https://felnne-ma-sf-exp.streamlit.app/
     - name: `felnne-salesforce-exp`
     - authorised JavaScript origins:
       - `http://localhost:8501`
+      - `https://felnne-ma-sf-exp.streamlit.app`
     - authorised redirect URIs:
       - `http://localhost:8501/component/streamlit_oauth.authorize_button/index.html`
+      - `https://felnne-ma-sf-exp.streamlit.app/component/streamlit_oauth.authorize_button/index.html`
+3. create a Streamlit Community Cloud deployment
+    - push code to GitHub
+    - if needed, create a Streamlit Community Cloud account and authorise GitHub integration
+    - create a new Streamlit app:
+      - deployment type: *deploy a public app from GitHub*
+      - repository: (as setup in GitHub)
+      - branch: `main`
+      - main file path: `main.py`
+      - app URL: `felnne-ma-sf-exp`
+      - (advanced settings) Python version: 3.12
+      - (advanced settings) secrets: (as per `.streamlit/secrets.toml.example`)
+        - set `oauth.redirect_uri` to: `https://felnne-ma-sf-exp.streamlit.app/component/streamlit_oauth.authorize_button/index.html`
 
 ## Developing
 
