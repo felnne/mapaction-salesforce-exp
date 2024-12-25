@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Project change log
 
+### Changed
+
+- Refactoring non-streamlit specific models and clients into separate modules
+
 ## [0.2.0] - 2024-12-24
 
 ### Added
