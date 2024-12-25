@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.3.4] - 2024-12-25
+
 ### Changed
 
 * Downgrading Python version to 3.12 to match deployment version

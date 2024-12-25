@@ -1,6 +1,6 @@
 [project]
 name = "ma-sf-exp"
-version = "0.3.3"
+version = "0.3.4"
 description = "Experiment to programmatically access and manage Salesforce data."
 authors = [{name="Felix Fennell", email="ffennell@mapaction.org"}]
 readme = "README.md"
