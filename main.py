@@ -4,7 +4,7 @@ sys.path.append("src")
 
 import streamlit as st
 
-from sf_exp.clients import StreamlitOauthClient, SalesforceClient
+from sf_exp.clients import StreamlitOauthClient, SalesforceClient, google_icon
 from sf_exp.models import Config
 
 
@@ -19,6 +19,17 @@ def load_config() -> Config:
         sf_domain=st.secrets.salesforce.domain,
         sf_client_id=st.secrets.salesforce.client_id,
         sf_client_secret=st.secrets.salesforce.client_secret,
+    )
+
+
+def generate_oauth_authorize_button(st_oauth: StreamlitOauthClient, config: Config) -> dict:
+    # noinspection PyProtectedMember
+    return st_oauth._client.authorize_button(
+        name="Continue with Google",
+        redirect_uri=config.oauth_redirect_uri,
+        scope=config.oauth_scope,
+        icon=google_icon,
+        pkce="S256",
     )
 
 
@@ -44,7 +55,7 @@ def main():
     if "auth_id_token" not in st.session_state:
         st.write("To begin, sign in with your MapAction Google account to load your details.")
 
-        result = st_oauth.authorize_button()
+        result = generate_oauth_authorize_button(st_oauth=st_oauth, config=config)
         if result and "token" in result:
             st_oauth.process_token(result)
             st.session_state.auth_id_token = st_oauth.token
