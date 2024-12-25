@@ -34,7 +34,9 @@ def main():
         app. Volunteers viewing and updating parts of their personal information is used as an example use-case.
         """
     )
-    st.warning("This experiment uses an development Salesforce instance with a limited number of users. It cannot access real MapAction data.")
+    st.warning(
+        "This experiment uses an development Salesforce instance with a limited number of users. It cannot access real MapAction data."
+    )
     st.info("In this experiment only a few profile fields are shown, and only your mobile number can be updated.")
 
     if "auth_id_token" not in st.session_state:
