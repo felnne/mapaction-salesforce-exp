@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Project change log
 
+### Fixed
+
+- Only showing balloons when user first signs in
+
 ### Changed
 
 - Refactoring non-streamlit specific models and clients into separate modules

@@ -39,6 +39,8 @@ def main():
     )
     st.info("In this experiment only a few profile fields are shown, and only your mobile number can be updated.")
 
+    if "show_sign_in_success" not in st.session_state:
+        st.session_state.show_sign_in_success = False
     if "auth_id_token" not in st.session_state:
         st.write("To begin, sign in with your MapAction Google account to load your details.")
 
@@ -49,9 +51,12 @@ def main():
             st.session_state.auth_claim_email = st_oauth.id_claims.email
             st.session_state.auth_claim_given_name = st_oauth.id_claims.given_name
             st.session_state.auth_claim_family_name = st_oauth.id_claims.family_name
+            st.session_state.show_sign_in_success = True
             st.rerun()
     else:
-        st.balloons()
+        if st.session_state.show_sign_in_success:
+            st.balloons()
+            st.session_state.show_sign_in_success = False  # Reset to prevent showing on app reload
         name = f"{st.session_state.auth_claim_given_name} {st.session_state.auth_claim_family_name}"
         st.info(f"Signed in as: {name} ({st.session_state.auth_claim_email})")
 
