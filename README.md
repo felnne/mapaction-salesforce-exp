@@ -1,4 +1,4 @@
-# MapAction Salesforce Automotion Experiments
+# MapAction Salesforce Automation Experiments
 
 Experiment to programmatically access and manage Salesforce data.
 
@@ -31,9 +31,11 @@ Requirements:
 * [Git](https://git-scm.com) (`brew install git`)
 * [Pre-commit](https://pre-commit.com) (`uv tool install pre-commit`)
 
+Setup project:
+
 ```
-$ git clone ...
-$ cd sf-exp/
+$ git clone https://github.com/felnne/mapaction-salesforce-exp
+$ cd mapaction-salesforce-exp/
 $ pre-commit install
 $ cp .streamlit/secrets.toml.example .streamlit/secrets.toml
 ```

@@ -6,11 +6,14 @@ dist/
 wheels/
 *.egg-info
 
+# UV generated files
+.venv
+
 # Ruff generated files
 .ruff_cache/
 
-# Virtual environments
-.venv
+# PyCharm generated files
+.idea/
 
 # Streamlit
 .streamlit/secrets.toml

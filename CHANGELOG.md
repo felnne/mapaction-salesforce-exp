@@ -1,4 +1,4 @@
-# MapAction Salesforce Automotion Experiments - Change log
+# MapAction Salesforce Automation Experiments - Change log
 
 All notable changes to this project will be documented in this file.
 

@@ -1,5 +1,5 @@
 [project]
-name = "sf-exp"
+name = "ma-sf-exp"
 version = "0.1.0"
 description = "Experiment to programmatically access and manage Salesforce data."
 authors = [{name="Felix Fennell", email="ffennell@mapaction.org"}]

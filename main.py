@@ -177,14 +177,14 @@ def main():
     sf = SalesforceClient(config)
     st_oauth = StreamlitOauthClient(config)
 
-    st.title("MapAction Salesforce Automotion Experiments")
+    st.title("MapAction Salesforce Automation Experiments")
     st.write(
         """
         Experiment to explore the effort needed to access and update information stored in Salesforce from an external
         app. Volunteers viewing and updating parts of their personal information is used as an example use-case.
         """
     )
-    st.warning("This experiment uses an development Salesforce instance and cannot access real MapAction data.")
+    st.warning("This experiment uses an development Salesforce instance with a limited number of users. It cannot access real MapAction data.")
     st.info("In this experiment only a few profile fields are shown, and only your mobile number can be updated.")
 
     if "auth_id_token" not in st.session_state:
@@ -205,7 +205,7 @@ def main():
 
         contact = sf.contacts.find_by_email(st.session_state.auth_claim_email)
         if contact is None:
-            st.write("Contact not found.")
+            st.error("Contact not found for signed in user.")
         else:
             with st.form("contact"):
                 st.write("Update your contact details")
