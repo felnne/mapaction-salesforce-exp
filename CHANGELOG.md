@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 * Downgrading Python version to 3.12 to match deployment version
+* Rearranging app
 
 ## [0.3.3] - 2024-12-25
 
