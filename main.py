@@ -1,14 +1,10 @@
-import sys
-
 import jwt
 from streamlit_oauth import OAuth2Component
 
-sys.path.append("src")
-
 import streamlit as st
 
-from sf_exp.clients import SalesforceClient
-from sf_exp.models import Config, AuthClaims
+from clients import SalesforceClient
+from models import Config, AuthClaims
 
 google_icon = (
     "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' "
@@ -84,11 +80,7 @@ def load_config() -> Config:
     )
 
 
-def main():
-    config = load_config()
-    sf = SalesforceClient(config)
-    st_oauth = StreamlitOauthClient(config)
-
+def intro_section() -> None:
     st.title("MapAction Salesforce Automation Experiments")
     st.write(
         """
@@ -100,6 +92,14 @@ def main():
         "This experiment uses an development Salesforce instance with a limited number of users. It cannot access real MapAction data."
     )
     st.info("In this experiment only a few profile fields are shown, and only your mobile number can be updated.")
+
+
+def main():
+    config = load_config()
+    sf = SalesforceClient(config)
+    st_oauth = StreamlitOauthClient(config)
+
+    intro_section()
 
     if "show_sign_in_success" not in st.session_state:
         st.session_state.show_sign_in_success = False

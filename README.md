@@ -53,7 +53,7 @@ $ uv run -- streamlit run main.py
 To create a release:
 
 - close release in `CHANGELOG.md`
-- increment version in `pyproject.toml`
+- increment version in `pyproject.toml` and update `uv.lock` via `uv lock`
 - create release commit
 - tag release
 - push `main` branch and tag

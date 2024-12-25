@@ -1,6 +1,6 @@
 from simple_salesforce import Salesforce
 
-from sf_exp.models import Contact, Config
+from models import Contact, Config
 
 
 # noinspection SqlResolve
