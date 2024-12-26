@@ -18,8 +18,8 @@ https://felnne-ma-sf-exp.streamlit.app/
       - `http://localhost:8501`
       - `https://felnne-ma-sf-exp.streamlit.app`
     - authorised redirect URIs:
-      - `http://localhost:8501/component/streamlit_oauth.authorize_button/index.html`
-      - `https://felnne-ma-sf-exp.streamlit.app/component/streamlit_oauth.authorize_button/index.html`
+      - `http://localhost:8501/oauth2callback`
+      - `https://felnne-ma-sf-exp.streamlit.app/oauth2callback`
 3. create a Streamlit Community Cloud deployment
     - push code to GitHub
     - if needed, create a Streamlit Community Cloud account and authorise GitHub integration
@@ -30,8 +30,10 @@ https://felnne-ma-sf-exp.streamlit.app/
       - main file path: `main.py`
       - app URL: `felnne-ma-sf-exp`
       - (advanced settings) Python version: 3.12
-      - (advanced settings) secrets: (as per `.streamlit/secrets.toml.example`)
-        - set `oauth.redirect_uri` to: `https://felnne-ma-sf-exp.streamlit.app/component/streamlit_oauth.authorize_button/index.html`
+      - (advanced settings) secrets:
+        - as per `.streamlit/secrets.toml.example`
+        - set `auth.redirect_uri` to `https://felnne-ma-sf-exp.streamlit.app/oauth2callback`
+        - set `auth.cookie_secret` to a cryptographically secure random string (e.g. using `openssl rand -base64 128`)
 
 ## Developing
 
@@ -52,7 +54,8 @@ $ pre-commit install
 $ cp .streamlit/secrets.toml.example .streamlit/secrets.toml
 ```
 
-Update any 'xxx' values in `.streamlit/secrets.toml`.
+Update any 'xxx' values in `.streamlit/secrets.toml`. For the cookie secret, generate a cryptographically secure random
+string (e.g. using `openssl rand -base64 128`).
 
 **Note:** UV will automatically create a Python virtual environment for the project at runtime.
 

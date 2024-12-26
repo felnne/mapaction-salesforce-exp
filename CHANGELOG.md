@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.3.5] - 2024-12-26
+
+### Changed
+
+* Switching OAuth provider package to https://github.com/kajarenc/stauthlib to resolve auth issues in deployment
+
 ## [0.3.4] - 2024-12-25
 
 ### Changed

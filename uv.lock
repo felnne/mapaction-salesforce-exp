@@ -18,26 +18,24 @@ wheels = [
 ]
 
 [[package]]
-name = "anyio"
-version = "4.7.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "idna" },
-    { name = "sniffio" },
-    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/f6/40/318e58f669b1a9e00f5c4453910682e2d9dd594334539c7b7817dabb765f/anyio-4.7.0.tar.gz", hash = "sha256:2f834749c602966b7d456a7567cafcb309f96482b5081d14ac93ccd457f9dd48", size = 177076 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/a0/7a/4daaf3b6c08ad7ceffea4634ec206faeff697526421c20f07628c7372156/anyio-4.7.0-py3-none-any.whl", hash = "sha256:ea60c3723ab42ba6fff7e8ccb0488c898ec538ff4df1f1d5e642c3601d07e352", size = 93052 },
-]
-
-[[package]]
 name = "attrs"
 version = "24.3.0"
 source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/48/c8/6260f8ccc11f0917360fc0da435c5c9c7504e3db174d5a12a1494887b045/attrs-24.3.0.tar.gz", hash = "sha256:8f5c07333d543103541ba7be0e2ce16eeee8130cb0b3f9238ab904ce1e85baff", size = 805984 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/89/aa/ab0f7891a01eeb2d2e338ae8fecbe57fcebea1a24dbb64d45801bfab481d/attrs-24.3.0-py3-none-any.whl", hash = "sha256:ac96cd038792094f438ad1f6ff80837353805ac950cd2aa0e0625ef19850c308", size = 63397 },
+]
+
+[[package]]
+name = "authlib"
+version = "1.4.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "cryptography" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/33/7d/67f064784776afc59d6deda9f4b8e117843d7cda8ddf34bbdbbae39641ca/authlib-1.4.0.tar.gz", hash = "sha256:1c1e6608b5ed3624aeeee136ca7f8c120d6f51f731aa152b153d54741840e1f2", size = 147327 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/63/c6/6a14bb00f963597d675fa63f060eb6db3fdb54bbf01d94768f51d067f578/Authlib-1.4.0-py2.py3-none-any.whl", hash = "sha256:4bb20b978c8b636222b549317c1815e1fe62234fc1c5efe8855d84aebf3a74e3", size = 225531 },
 ]
 
 [[package]]
@@ -212,55 +210,6 @@ wheels = [
 ]
 
 [[package]]
-name = "h11"
-version = "0.14.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/f5/38/3af3d3633a34a3316095b39c8e8fb4853a28a536e55d347bd8d8e9a14b03/h11-0.14.0.tar.gz", hash = "sha256:8f19fbbe99e72420ff35c00b27a34cb9937e902a8b810e2c88300c6f0a3b699d", size = 100418 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/95/04/ff642e65ad6b90db43e668d70ffb6736436c7ce41fcc549f4e9472234127/h11-0.14.0-py3-none-any.whl", hash = "sha256:e3fe4ac4b851c468cc8363d500db52c2ead036020723024a109d37346efaa761", size = 58259 },
-]
-
-[[package]]
-name = "httpcore"
-version = "1.0.7"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "certifi" },
-    { name = "h11" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/6a/41/d7d0a89eb493922c37d343b607bc1b5da7f5be7e383740b4753ad8943e90/httpcore-1.0.7.tar.gz", hash = "sha256:8551cb62a169ec7162ac7be8d4817d561f60e08eaa485234898414bb5a8a0b4c", size = 85196 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/87/f5/72347bc88306acb359581ac4d52f23c0ef445b57157adedb9aee0cd689d2/httpcore-1.0.7-py3-none-any.whl", hash = "sha256:a3fff8f43dc260d5bd363d9f9cf1830fa3a458b332856f34282de498ed420edd", size = 78551 },
-]
-
-[[package]]
-name = "httpx"
-version = "0.28.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "anyio" },
-    { name = "certifi" },
-    { name = "httpcore" },
-    { name = "idna" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/b1/df/48c586a5fe32a0f01324ee087459e112ebb7224f646c0b5023f5e79e9956/httpx-0.28.1.tar.gz", hash = "sha256:75e98c5f16b0f35b567856f597f06ff2270a374470a5c2392242528e3e3e42fc", size = 141406 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/2a/39/e50c7c3a983047577ee07d2a9e53faf5a69493943ec3f6a384bdc792deb2/httpx-0.28.1-py3-none-any.whl", hash = "sha256:d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad", size = 73517 },
-]
-
-[[package]]
-name = "httpx-oauth"
-version = "0.15.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "httpx" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/6d/08/b2e0f360e84994ec5c67473cef7198d22ccb2215e5068c0a21182d22baaa/httpx_oauth-0.15.1.tar.gz", hash = "sha256:4094cf0938fc7252b5f5dfd62cd1ab5aee2fcb6734e621942ee17d1af4806b74", size = 41302 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/32/ac/7ed132cb22ed9ca1be2e837834cbe1786d79375b9c6a6f6a595aa1629ec3/httpx_oauth-0.15.1-py3-none-any.whl", hash = "sha256:89b45f250e93e42bbe9631adf349cab0e3d3ced958c07e06651735198d1bdf00", size = 37304 },
-]
-
-[[package]]
 name = "idna"
 version = "3.10"
 source = { registry = "https://pypi.org/simple" }
@@ -361,13 +310,12 @@ wheels = [
 
 [[package]]
 name = "ma-sf-exp"
-version = "0.3.4"
+version = "0.3.5"
 source = { virtual = "." }
 dependencies = [
     { name = "pyjwt" },
     { name = "simple-salesforce" },
     { name = "streamlit" },
-    { name = "streamlit-oauth" },
 ]
 
 [package.dev-dependencies]
@@ -379,8 +327,7 @@ dev = [
 requires-dist = [
     { name = "pyjwt", specifier = ">=2.10.1" },
     { name = "simple-salesforce", specifier = ">=1.12.6" },
-    { name = "streamlit", specifier = ">=1.41.1" },
-    { name = "streamlit-oauth", specifier = ">=0.1.14" },
+    { name = "streamlit", url = "https://github.com/kajarenc/stauthlib/raw/refs/heads/main/streamlit-1.41.0-py2.py3-none-any.whl" },
 ]
 
 [package.metadata.requires-dev]
@@ -691,15 +638,6 @@ wheels = [
 ]
 
 [[package]]
-name = "python-dotenv"
-version = "1.0.1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/bc/57/e84d88dfe0aec03b7a2d4327012c1627ab5f03652216c63d49846d7a6c58/python-dotenv-1.0.1.tar.gz", hash = "sha256:e324ee90a023d808f1959c46bcbc04446a10ced277783dc6ee09987c37ec10ca", size = 39115 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/6a/3e/b68c118422ec867fa7ab88444e1274aa40681c606d59ac27de5a5588f082/python_dotenv-1.0.1-py3-none-any.whl", hash = "sha256:f7b63ef50f1b690dddf550d03497b66d609393b40b564ed0d674909a68ebf16a", size = 19863 },
-]
-
-[[package]]
 name = "pytz"
 version = "2024.2"
 source = { registry = "https://pypi.org/simple" }
@@ -880,20 +818,12 @@ wheels = [
 ]
 
 [[package]]
-name = "sniffio"
-version = "1.3.1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/a2/87/a6771e1546d97e7e041b6ae58d80074f81b7d5121207425c964ddf5cfdbd/sniffio-1.3.1.tar.gz", hash = "sha256:f4324edc670a0f49750a81b895f35c3adb843cca46f0530f79fc1babb23789dc", size = 20372 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/e9/44/75a9c9421471a6c4805dbf2356f7c181a29c1879239abab1ea2cc8f38b40/sniffio-1.3.1-py3-none-any.whl", hash = "sha256:2f6da418d1f1e0fddd844478f41680e794e6051915791a034ff65e5f100525a2", size = 10235 },
-]
-
-[[package]]
 name = "streamlit"
-version = "1.41.1"
-source = { registry = "https://pypi.org/simple" }
+version = "1.41.0"
+source = { url = "https://github.com/kajarenc/stauthlib/raw/refs/heads/main/streamlit-1.41.0-py2.py3-none-any.whl" }
 dependencies = [
     { name = "altair" },
+    { name = "authlib" },
     { name = "blinker" },
     { name = "cachetools" },
     { name = "click" },
@@ -913,23 +843,34 @@ dependencies = [
     { name = "typing-extensions" },
     { name = "watchdog", marker = "sys_platform != 'darwin'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/78/33/14b5ac0369ecf0af675911e5e84b934e6fcc2cec850857d2390eb373b0a6/streamlit-1.41.1.tar.gz", hash = "sha256:6626d32b098ba1458b71eebdd634c62af2dd876380e59c4b6a1e828a39d62d69", size = 8712473 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c2/87/b2e162869500062a94dde7589c167367b5538dab6eacce2e7c0f00d5c9c5/streamlit-1.41.1-py2.py3-none-any.whl", hash = "sha256:0def00822480071d642e6df36cd63c089f991da3a69fd9eb4ab8f65ce27de4e0", size = 9100386 },
+    { url = "https://github.com/kajarenc/stauthlib/raw/refs/heads/main/streamlit-1.41.0-py2.py3-none-any.whl", hash = "sha256:ca7cf7274e76e1fb4eebc02626df56f860bab0e2a599c60a404b5cd85a00e40b" },
 ]
 
-[[package]]
-name = "streamlit-oauth"
-version = "0.1.14"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "httpx-oauth" },
-    { name = "python-dotenv" },
-    { name = "streamlit" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/90/c6/05fc0f5ce56253a7ac4ece6bc146921b8b95a65f19653ad1005954f41539/streamlit_oauth-0.1.14.tar.gz", hash = "sha256:bb54c6cb489e02fa389c6727e668b363e2da9ba73d19da221c865d2e83250453", size = 65429 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/08/8d/d70b107f7b092d760ebcebc2fbeebe3c35480403bae1537c595120120a0e/streamlit_oauth-0.1.14-py3-none-any.whl", hash = "sha256:d7b6608df8c2bedaa32a7602c983dbefa0316103e77dfdfc3aa7a84d932af898", size = 121025 },
+[package.metadata]
+requires-dist = [
+    { name = "altair", specifier = ">=4.0,<6" },
+    { name = "authlib", specifier = ">=1.3.1,<2" },
+    { name = "blinker", specifier = ">=1.0.0,<2" },
+    { name = "cachetools", specifier = ">=4.0,<6" },
+    { name = "click", specifier = ">=7.0,<9" },
+    { name = "gitpython", specifier = ">=3.0.7,!=3.1.19,<4" },
+    { name = "numpy", specifier = ">=1.23,<3" },
+    { name = "packaging", specifier = ">=20,<25" },
+    { name = "pandas", specifier = ">=1.4.0,<3" },
+    { name = "pillow", specifier = ">=7.1.0,<12" },
+    { name = "protobuf", specifier = ">=3.20,<6" },
+    { name = "pyarrow", specifier = ">=7.0" },
+    { name = "pydeck", specifier = ">=0.8.0b4,<1" },
+    { name = "requests", specifier = ">=2.27,<3" },
+    { name = "rich", specifier = ">=10.14.0,<14" },
+    { name = "snowflake-connector-python", marker = "python_full_version < '3.12' and extra == 'snowflake'", specifier = ">=2.8.0" },
+    { name = "snowflake-snowpark-python", extras = ["modin"], marker = "python_full_version < '3.12' and extra == 'snowflake'", specifier = ">=1.17.0" },
+    { name = "tenacity", specifier = ">=8.1.0,<10" },
+    { name = "toml", specifier = ">=0.10.1,<2" },
+    { name = "tornado", specifier = ">=6.0.3,<7" },
+    { name = "typing-extensions", specifier = ">=4.3.0,<5" },
+    { name = "watchdog", marker = "sys_platform != 'darwin'", specifier = ">=2.1.5,<7" },
 ]
 
 [[package]]
