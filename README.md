@@ -32,6 +32,7 @@ https://felnne-ma-sf-exp.streamlit.app/
       - (advanced settings) Python version: 3.12
       - (advanced settings) secrets:
         - as per `.streamlit/secrets.toml.example`
+        - set `env.platform` to `streamlit`
         - set `auth.redirect_uri` to `https://felnne-ma-sf-exp.streamlit.app/oauth2callback`
         - set `auth.cookie_secret` to a cryptographically secure random string (e.g. using `openssl rand -base64 128`)
 

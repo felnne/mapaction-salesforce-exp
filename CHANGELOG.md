@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+* Bypassing/faking OAuth when deployed to Streamlit Community Cloud (not yet supported)
+
 ## [0.3.5] - 2024-12-26
 
 ### Changed

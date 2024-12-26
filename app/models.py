@@ -17,3 +17,9 @@ class Contact:
 
     def __repr__(self):
         return f"Contact(sf_id={self.sf_id}, email={self.email})"
+
+
+@dataclass()
+class AuthInfo:
+    name: str
+    email: str

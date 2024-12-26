@@ -1,7 +1,7 @@
 import streamlit as st
 
 from app.clients import SalesforceClient
-from app.models import Config
+from app.models import Config, AuthInfo
 
 
 def load_config() -> Config:
@@ -13,6 +13,12 @@ def load_config() -> Config:
 
 
 def intro_section() -> None:
+def supports_oauth() -> bool:
+    if st.secrets.env.platform == "streamlit":
+        return False
+    return True
+
+
     st.markdown(
         """
         # MapAction Salesforce Automation Experiments
@@ -29,8 +35,33 @@ def intro_section() -> None:
     )
 
 
-def contact_form_section(salesforce_client: SalesforceClient) -> None:
-    contact = salesforce_client.contacts.find_by_email(st.experimental_user.email)
+def show_auth_sign_in() -> AuthInfo | None:
+    if not st.experimental_user.is_authenticated and supports_oauth():
+        st.info("To begin, sign in with your MapAction Google account to load your (fake) details.")
+        google_button = st.button("Continue with Google")
+        if google_button:
+            st.experimental_user.login(provider="google")
+    elif st.experimental_user.is_authenticated and supports_oauth():
+        return AuthInfo(
+            name=st.experimental_user.name,
+            email=st.experimental_user.email,
+        )
+    elif not supports_oauth():
+        return AuthInfo(
+            name="Connie Watson (Example User)",
+            email="cwatson@mapaction.org",
+        )
+
+
+def show_auth_sign_out() -> None:
+    if supports_oauth():
+        logout_button = st.button("Logout")
+        if logout_button:
+            st.experimental_user.logout()
+
+
+def show_contact_form(salesforce_client: SalesforceClient, auth_info: AuthInfo) -> None:
+    contact = salesforce_client.contacts.find_by_email(auth_info.email)
 
     if contact is None:
         st.error("Your account is not registered to use this experiment.")
@@ -52,8 +83,6 @@ def debug_section() -> None:
     st.markdown("---")
     expand = st.expander("Debug info")
     with expand:
-        st.write("Auth info:")
-        st.json(st.experimental_user)
 
 
 def main():
@@ -62,22 +91,17 @@ def main():
 
     intro_section()
 
-    if not st.experimental_user.is_authenticated:
-        st.write("To begin, sign in with your MapAction Google account to load your details.")
-        google_button = st.button("Continue with Google")
-        if google_button:
-            st.experimental_user.login(provider="google")
-    else:
-        st.info(f"Signed in as: {st.experimental_user.name} ({st.experimental_user.email})")
-        logout_button = st.button("Logout")
-        if logout_button:
-            st.experimental_user.logout()
+    auth_info = show_auth_sign_in()
+    if auth_info:
+        st.info(f"Signed in as: {auth_info.name} ({auth_info.email})")
+        show_auth_sign_out()
 
-        contact_form_section(salesforce_client=sf)
+        show_contact_form(salesforce_client=sf, auth_info=auth_info)
+
 
     debug_section()
     if error := st.experimental_user.get("error"):
-        st.error(f"Auth error: {error}")
+        st.error(f"OAuth error: {error}")
 
 
 if __name__ == "__main__":
