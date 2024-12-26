@@ -1,3 +1,6 @@
+from pathlib import Path
+from tomllib import load as toml_load
+
 import streamlit as st
 
 from app.clients import SalesforceClient
@@ -12,25 +15,27 @@ def load_config() -> Config:
     )
 
 
-def intro_section() -> None:
 def supports_oauth() -> bool:
     if st.secrets.env.platform == "streamlit":
         return False
     return True
 
 
+def app_version() -> str:
+    with Path("pyproject.toml").open(mode="rb") as f:
+        # noinspection PyTypeChecker
+        data = toml_load(f)
+        return data["project"]["version"]
+
+
+def show_intro() -> None:
+    st.title("MapAction Salesforce Automation Experiments")
     st.markdown(
         """
-        # MapAction Salesforce Automation Experiments
-        Experiment to explore the effort needed to access and update information stored in Salesforce from an external
-        app. Volunteers viewing and updating parts of their personal information is used as an example use-case.
+        Experiment to explore the effort needed to access and update information stored in Salesforce.
+        It uses the use-case of volunteers viewing and updating parts of their personal information as an example.
 
-        In this experiment:
-        - accounts for a limited subset of volunteers (plus some fake volunteers for some staff to test with) are registered
-        - a limited subset fields from the Salesforce contact object are shown for each (fake) volunteer
-        - only the mobile number field can be updated (other details are set to read-only)
-
-        **Note:** This experiment uses a standalone Salesforce instance. It cannot access real MapAction data.
+        **Note:** This experiment does not use real MapAction data.
         """
     )
 
@@ -64,7 +69,7 @@ def show_contact_form(salesforce_client: SalesforceClient, auth_info: AuthInfo) 
     contact = salesforce_client.contacts.find_by_email(auth_info.email)
 
     if contact is None:
-        st.error("Your account is not registered to use this experiment.")
+        st.error("This account is not registered to use this experiment.")
     else:
         st.header("Personal Details", divider=True)
         with st.form("contact"):
@@ -79,17 +84,33 @@ def show_contact_form(salesforce_client: SalesforceClient, auth_info: AuthInfo) 
             st.success("Details updated successfully.")
 
 
-def debug_section() -> None:
+def show_experiment_info() -> None:
     st.markdown("---")
-    expand = st.expander("Debug info")
+    expand = st.expander("Experiment information")
     with expand:
+        st.markdown(
+            f"""
+            ### App info
+            - version: {app_version()}
+            - repo: [github.com/felnne/mapaction-salesforce-exp](https://github.com/felnne/mapaction-salesforce-exp)
+            """
+        )
+
+        st.markdown(
+            """
+            ### Limitations
+            - this experiment uses a standalone Salesforce instance - it cannot access real data
+            - limited information (name, email, mobile) are shown for each volunteer's Salesforce contact object
+            - only the mobile number field can be updated (other details are set to read-only)
+            """
+        )
 
 
 def main():
     config = load_config()
     sf = SalesforceClient(config)
 
-    intro_section()
+    show_intro()
 
     auth_info = show_auth_sign_in()
     if auth_info:
@@ -98,8 +119,8 @@ def main():
 
         show_contact_form(salesforce_client=sf, auth_info=auth_info)
 
+    show_experiment_info()
 
-    debug_section()
     if error := st.experimental_user.get("error"):
         st.error(f"OAuth error: {error}")
 

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+* Experiment information section
+* Watchdog dependency for running Streamlit locally
+
 ### Changed
 
 * Bypassing/faking OAuth when deployed to Streamlit Community Cloud (not yet supported)
@@ -16,6 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 * Switching OAuth provider package to https://github.com/kajarenc/stauthlib to resolve auth issues in deployment
+* Rearranging streamlit app
 
 ## [0.3.4] - 2024-12-25
 

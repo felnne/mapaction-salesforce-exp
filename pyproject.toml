@@ -13,6 +13,7 @@ dependencies = [
     "pyjwt>=2.10.1",
     "simple-salesforce>=1.12.6",
     "streamlit",
+    "watchdog>=6.0.0",
 ]
 
 [dependency-groups]
