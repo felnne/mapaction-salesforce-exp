@@ -18,7 +18,9 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "dunamai>=1.23.0",  # for release.py
     "ruff>=0.8.4",
+    "tomlkit>=0.13.2",  # for release.py
 ]
 
 [tool.ruff]
