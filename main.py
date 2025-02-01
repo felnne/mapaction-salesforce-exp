@@ -41,12 +41,12 @@ def show_intro() -> None:
 
 
 def show_auth_sign_in() -> AuthInfo | None:
-    if not st.experimental_user.is_authenticated and supports_oauth():
+    if not st.experimental_user.get("is_logged_in") and supports_oauth():
         st.info("To begin, sign in with your MapAction Google account to load your (fake) details.")
         google_button = st.button("Continue with Google")
         if google_button:
-            st.experimental_user.login(provider="google")
-    elif st.experimental_user.is_authenticated and supports_oauth():
+            st.login(provider="google")
+    elif st.experimental_user.get("is_logged_in") and supports_oauth():
         return AuthInfo(
             name=st.experimental_user.name,
             email=st.experimental_user.email,
@@ -62,7 +62,7 @@ def show_auth_sign_out() -> None:
     if supports_oauth():
         logout_button = st.button("Logout")
         if logout_button:
-            st.experimental_user.logout()
+            st.logout()
 
 
 def show_contact_form(salesforce_client: SalesforceClient, auth_info: AuthInfo) -> None:
