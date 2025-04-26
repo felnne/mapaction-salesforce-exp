@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+* upgrading `streamlit` (incorporating Streamlit auth, removing `authlib` and `pyjwt` dependency)
+* upgrading `.streamlit/secrets.toml` template to reflect Streamlit auth
+
 ## [0.4.1] - 2025-02-01
 
 ### Fixed
