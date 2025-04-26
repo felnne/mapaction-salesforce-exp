@@ -15,12 +15,6 @@ def load_config() -> Config:
     )
 
 
-def supports_oauth() -> bool:
-    if st.secrets.env.platform == "streamlit":
-        return False
-    return True
-
-
 def app_version() -> str:
     with Path("pyproject.toml").open(mode="rb") as f:
         # noinspection PyTypeChecker
@@ -41,28 +35,21 @@ def show_intro() -> None:
 
 
 def show_auth_sign_in() -> AuthInfo | None:
-    if not st.experimental_user.get("is_logged_in") and supports_oauth():
+    if not st.experimental_user.is_logged_in:
         st.info("To begin, sign in with your MapAction Google account to load your (fake) details.")
-        google_button = st.button("Continue with Google")
-        if google_button:
-            st.login(provider="google")
-    elif st.experimental_user.get("is_logged_in") and supports_oauth():
+        if st.button("Continue with Google"):
+            st.login()
+        return None
+    else:
         return AuthInfo(
             name=st.experimental_user.name,
             email=st.experimental_user.email,
         )
-    elif not supports_oauth():
-        return AuthInfo(
-            name="Connie Watson (Example User)",
-            email="cwatson@mapaction.org",
-        )
 
 
 def show_auth_sign_out() -> None:
-    if supports_oauth():
-        logout_button = st.button("Logout")
-        if logout_button:
-            st.logout()
+    if st.button("Logout"):
+        st.logout()
 
 
 def show_contact_form(salesforce_client: SalesforceClient, auth_info: AuthInfo) -> None:
